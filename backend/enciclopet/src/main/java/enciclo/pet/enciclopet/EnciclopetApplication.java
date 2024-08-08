@@ -11,3 +11,9 @@ public class EnciclopetApplication {
 	}
 
 }
+
+
+
+// git checkout backend[X] / frontend[]
+// git branch
+

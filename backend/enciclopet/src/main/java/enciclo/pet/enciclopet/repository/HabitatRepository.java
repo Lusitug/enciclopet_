@@ -1,7 +1,6 @@
 package enciclo.pet.enciclopet.repository;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,16 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import enciclo.pet.enciclopet.models.entity.Animal;
 import enciclo.pet.enciclopet.models.entity.Habitat;
+import enciclo.pet.enciclopet.models.enums.HabitatTipo;
 
 @Repository
-@RepositoryRestResource(collectionResourceRel = "animais", path = "animais")
-public interface AnimalRepository extends JpaRepository<Animal, Long>{
-
-    Animal findAnimalByCode(UUID animalCode);
+@RepositoryRestResource(path = "habitats", collectionResourceRel = "habitats")
+public interface HabitatRepository extends JpaRepository<Habitat, Long>{
     
-    @Query("SELECT a.habitat FROM Animal a")
-    List<Habitat> findAllHabitats();
-
-    @Query("SELECT a.habitat FROM  Animal a WHERE a.id = :id" )
-    List<Habitat> findHabitatByAnimalId(@Param("id") long id);
-} 
+    @Query("SELECT h.animaislocais FROM Habitat h WHERE h.habitattipo = :tipo")
+    public List<Animal> findAnimaisByHabitatTipo(@Param("tipo") HabitatTipo tipo);
+}
